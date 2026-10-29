@@ -1,0 +1,12 @@
+{
+  "cipher" : "AES-256-GCM",
+  "kdf" : {
+    "iterations" : 600000,
+    "name" : "PBKDF2-HMAC-SHA256",
+    "salt" : "SS\/tWpC9Y8Itb2zDzylmVg=="
+  },
+  "nonce" : "mSrtXkuHjl+402i1",
+  "format" : "keybox-vault",
+  "version" : 1,
+  "data" : "+MmNdf0hiJIEXRlrZQua87Ua8KAq6DZyabABJFe9SbGQpao89VlKEtivKgVmNzM8AtWRaWqAUgh+8DhONiuV1HpIgCDbCKgzgqGpW\/6hzkFSlgelfX3cIo4rkMku6jqADN0goFvECl3PzoAGOv6NZU+73H\/sWDcl3JGG1QvWjXmtiNbOaA5GYy+zgg3rDRPaTZiywklCPkZ4VhUANrHW9Fb06WjDHccto\/oc9ivxLO4KQeCmdey1K5X+ZYNFGk1sx47yccfrMbyUZyJuDSqGtADrG2yCQWOFrfRcDxLtTDMO\/5yby+IXj7I3ikDm5i6\/jkzwsPpLTbPSiIOuBHUj1b0W6L3wy+Dsy3GDTsmkHiyofWPCoeAaR2UXQII9icN\/2EpPQGIBvhLHqYQ5p5Vmt9\/vwBjdzlKOXhQ\/8EehksYy1bhZ7Q77nocMhCo+jm0xJ8FGpY4KCpuRvZvl1Chf9WxiCCsebJz2ShKyva64YNQ3sTzP5U0dinfpzOIu7QoW1KGvVf8GFg00Od3UPSKloh2jfFtfFO3xEbgUvOQ6FbMVp45J66UJCiaORsugunv4p6ak2VxIhwP4pQGaVAlSVoIcfFUYRsUcRlPpbUOTZ4jr1zw8Ij6CBJ8NXF7YNlsE5OmMDSZZzJ8T5DWidggzi+gVVAT+En9zNz\/NmZME08HohciU9oF\/4u5QI94GiNyI+2bLp9zhH1+3TYgnbaz790uHpaG0J2ke5mvSIZWlNMqyC+2EN0LGeGGKCcaZqaPew3t8rjJq8fmg4wj8xeafar5NUcYPWVN\/KrAjODeBaIdThYREdTnLY2yr4XPjf84zw1uGWwanZY+nuCCBw2+X8d3gZiLz2NGZRWY9jTCBIeakjMuQmpZZnMoinzmxEc\/j3WxUZOcrabmJKNaMUf+0lGz5L7GF6pZxX98o1Qohjvo8KuGV4sjeS1QIkdlIoIRpOwUn22DalYgHezW\/wUeonS2U5RUN+9YrpFjTJRbPljjacX7c0A=="
+}

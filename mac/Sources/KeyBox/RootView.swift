@@ -119,8 +119,11 @@ struct MainView: View {
             SidebarView()
                 .navigationSplitViewColumnWidth(min: 240, ideal: 290, max: 380)
         } detail: {
-            if let draft = Binding($model.draft) {
-                EditView(draft: draft)
+            if model.draft != nil {
+                // Not Binding($model.draft): that binding force-unwraps, and the edit view still reads it
+                // once more in the update that sets draft to nil (Save / Cancel), which crashed.
+                EditView(draft: Binding(get: { model.draft ?? ApiEntry() },
+                                        set: { if model.draft != nil { model.draft = $0 } }))
             } else if let entry = model.selected {
                 DetailView(entry: entry)
             } else {

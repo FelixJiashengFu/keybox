@@ -1,0 +1,36 @@
+{
+  "entries" : [
+    {
+      "baseUrl" : "https:\/\/openrouter.ai\/api\/v1",
+      "bash" : "export OPENROUTER_API_KEY='sk-or-v1-fixture0123456789'",
+      "color" : "#6467F2",
+      "consoleUrl" : "https:\/\/openrouter.ai\/settings\/keys",
+      "created" : "2026-10-29T20:36:23.332Z",
+      "dotEnv" : "OPENROUTER_API_KEY=sk-or-v1-fixture0123456789",
+      "envVar" : "OPENROUTER_API_KEY",
+      "id" : "146dc92b5bb548cfbdb6f0e09db4e02b",
+      "key" : "sk-or-v1-fixture0123456789",
+      "lastCopied" : "2026-10-26T07:33:20.456Z",
+      "masked" : "sk-o••••••••••••6789",
+      "name" : "OpenRouter 备用",
+      "notes" : "来自 Mac 的条目\n第二行 \"双引号\" 'single' \\ 反斜杠",
+      "provider" : "OpenRouter"
+    },
+    {
+      "baseUrl" : "https:\/\/cloud.example.cn\/v1",
+      "bash" : "export MOU_API_KEY='custom'\\''key#2=x'",
+      "color" : "#1D4ED8",
+      "consoleUrl" : "",
+      "created" : "2026-10-29T20:36:23.332Z",
+      "dotEnv" : "MOU_API_KEY=\"custom'key#2=x\"",
+      "envVar" : "MOU_API_KEY",
+      "id" : "f5de66eeede94873aec2ae807c4812ed",
+      "key" : "custom'key#2=x",
+      "masked" : "cust••••••••••••#2=x",
+      "name" : "Mac 自定义",
+      "notes" : "",
+      "provider" : "某某云"
+    }
+  ],
+  "password" : "fixture-密码-123"
+}
