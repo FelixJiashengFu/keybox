@@ -1,10 +1,40 @@
 # 密钥匣 KeyBox
 
-一个只做一件事的 Windows 小软件：把你的 API Key 加密存在本机，要用时一键复制。
+一个只做一件事的小软件：把你的 API Key 加密存在本机，要用时一键复制。有 **Windows** 版（`src/`）和 **Mac** 版（`mac/`），两边的 `vault.json` 格式完全一样——复制过去，用同一个主密码就能打开。
 
 ![图标](src/KeyBox/Assets/KeyBox.png)
 
-## 安装
+## Mac 版
+
+在 [Releases](../../releases) 下载 `KeyBox-mac.zip`，解压后把「密钥匣」拖进「应用程序」。支持 macOS 13 及以上，Apple 芯片和 Intel 都能用。
+
+它没有经过 Apple 公证（那要付费的开发者账号），所以**第一次**打开会被拦住：
+
+- macOS 15 及以上：双击一次，看到提示后去「系统设置 → 隐私与安全性」，在下面点「仍要打开」；
+- macOS 13–14：在「应用程序」里按住 Control 点「密钥匣」，选「打开」；
+- 或者在「终端」里运行一次 `xattr -dr com.apple.quarantine /Applications/密钥匣.app`。
+
+和 Windows 版的区别：
+
+| | Windows | Mac |
+| --- | --- | --- |
+| 数据位置 | `%APPDATA%\KeyBox` | `~/Library/Application Support/KeyBox` |
+| 免密解锁 | Windows DPAPI | Touch ID / Mac 登录密码（解密钥匙放在钥匙串里） |
+| 导入 / 写入环境变量 | Windows 用户环境变量 | `~/.zshrc`、`~/.zprofile` 等 shell 配置文件 |
+| 剪贴板 | 不进 Win+V 历史和云剪贴板 | 标记为「隐藏内容」，剪贴板管理工具不记录 |
+| 自动锁定 | 空闲、Windows 锁屏 | 空闲、屏幕锁定、睡眠、切换用户 |
+
+快捷键：`⌘N` 新增、`⌘S` 保存、`Esc` 取消、`⇧⌘C` 复制选中的 Key、`⌘E` 编辑、`⌘L` 锁定、`⌘,` 设置；搜索框里按 Return 复制当前选中的 Key，列表里双击也能复制。
+
+Mac 版每次推送到 `mac/` 都由 GitHub Actions（`.github/workflows/mac.yml`）在 macOS 上编译成通用二进制、跑单元测试（含打开 Windows 版写的样本密钥库）、用 `--ui-snapshot` 模式把主要界面走一遍并截图，最后打包 `KeyBox-mac.zip`。本地有 Xcode 的话：
+
+```bash
+cd mac
+swift test
+scripts/build-app.sh          # -> dist/release/密钥匣.app 和 dist/KeyBox-mac.zip
+```
+
+## Windows 版安装
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File install.ps1             # 安装 / 更新
@@ -13,7 +43,7 @@ powershell -ExecutionPolicy Bypass -File install.ps1 -Uninstall  # 卸载（不�
 
 程序装到 `%LOCALAPPDATA%\Programs\KeyBox\KeyBox.exe`，桌面和开始菜单各有一个「密钥匣」快捷方式。重新打包后再运行一次 `install.ps1` 就更新了（运行前先关掉密钥匣）。
 
-## 用法
+## Windows 版用法
 
 双击桌面上的「密钥匣」。
 
@@ -53,7 +83,9 @@ dotnet build tests\KeyBox.UiSmoke
 tests\KeyBox.UiSmoke\bin\Debug\net10.0-windows\KeyBox.UiSmoke.exe dist\KeyBox.exe shots
 ```
 
-`KeyBox.exe --data <文件夹>` 可以换一个数据文件夹（测试就是这样做的，不会碰你的真实密钥库）。图标由 `tools\make-icon.ps1` 生成。
+`KeyBox.exe --data <文件夹>` 可以换一个数据文件夹（测试就是这样做的，不会碰你的真实密钥库）。图标（含 Mac 的 `AppIcon.iconset`）由 `tools\make-icon.ps1` 生成。
+
+`tests/fixtures/` 里是两边互相验证用的样本密钥库：`windows-vault.json` 由 `KeyBox.Tests --write-fixture tests\fixtures` 生成、Mac 测试负责打开；`mac-vault.json` 来自 Mac CI，Windows 测试负责打开。
 
 | 文件 | 作用 |
 | --- | --- |
