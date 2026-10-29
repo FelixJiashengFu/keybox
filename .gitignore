@@ -1,0 +1,9 @@
+bin/
+obj/
+dist/
+shots/
+*.user
+.vs/
+mac/.build/
+mac/.swiftpm/
+mac/dist/

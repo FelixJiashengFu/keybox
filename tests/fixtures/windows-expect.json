@@ -1,0 +1,36 @@
+{
+  "password": "fixture-\u5BC6\u7801-123",
+  "entries": [
+    {
+      "id": "354356f8725f4209be1449528f1628c8",
+      "name": "DeepSeek \u4E3B\u8D26\u53F7",
+      "provider": "DeepSeek",
+      "key": "sk-fixture-0123456789abcdef",
+      "baseUrl": "https://api.deepseek.com",
+      "envVar": "DEEPSEEK_API_KEY",
+      "consoleUrl": "https://platform.deepseek.com/api_keys",
+      "notes": "\u7B2C\u4E00\u884C\n\u7B2C\u4E8C\u884C \u0022\u53CC\u5F15\u53F7\u0022 \u0027single\u0027 \\ \u53CD\u659C\u6760",
+      "color": "#4D6BFE",
+      "masked": "sk-f\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022cdef",
+      "bash": "export DEEPSEEK_API_KEY=\u0027sk-fixture-0123456789abcdef\u0027",
+      "dotEnv": "DEEPSEEK_API_KEY=sk-fixture-0123456789abcdef",
+      "created": "2026-10-29T20:08:48.7538952Z",
+      "lastCopied": "2026-10-29T13:30:15.1230000Z"
+    },
+    {
+      "id": "1c7645488b474a52acb893d0fe9496cd",
+      "name": "\u4E2D\u8F6C\u7AD9",
+      "provider": "\u6211\u7684\u4E2D\u8F6C",
+      "key": "relay-key-with\u0027quote#1",
+      "baseUrl": "https://relay.example.com/v1",
+      "envVar": "RELAY_API_KEY",
+      "consoleUrl": "",
+      "notes": "",
+      "color": "#B45309",
+      "masked": "rela\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022\u2022te#1",
+      "bash": "export RELAY_API_KEY=\u0027relay-key-with\u0027\\\u0027\u0027quote#1\u0027",
+      "dotEnv": "RELAY_API_KEY=\u0022relay-key-with\u0027quote#1\u0022",
+      "created": "2026-10-29T20:08:48.7569172Z"
+    }
+  ]
+}

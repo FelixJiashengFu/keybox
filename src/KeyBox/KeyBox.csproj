@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>KeyBox</RootNamespace>
+    <AssemblyName>KeyBox</AssemblyName>
+    <ApplicationIcon>Assets\KeyBox.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>密钥匣 KeyBox</Product>
+    <Description>本机加密保存 API Key 的小工具</Description>
+    <Copyright>Jiasheng Fu</Copyright>
+    <!-- ThemeMode (WPF Fluent theme) is still marked experimental. -->
+    <NoWarn>$(NoWarn);WPF0001</NoWarn>
+    <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\KeyBox.ico" />
+    <Resource Include="Assets\KeyBox.png" />
+  </ItemGroup>
+
+</Project>

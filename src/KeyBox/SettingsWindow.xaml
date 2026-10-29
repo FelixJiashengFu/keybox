@@ -1,0 +1,108 @@
+<Window x:Class="KeyBox.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="设置" Width="580" Height="680" MinWidth="460" MinHeight="420"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+        Icon="pack://application:,,,/Assets/KeyBox.ico">
+    <Window.Resources>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="Padding" Value="18,14" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+        <Style x:Key="Heading" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,0,0,10" />
+        </Style>
+        <Style x:Key="Note" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,18,24,20">
+            <TextBlock Text="设置" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,16" />
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="安全" Style="{StaticResource Heading}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="160" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="空闲多久自动锁定" VerticalAlignment="Center" />
+                        <ComboBox x:Name="AutoLockBox" Grid.Column="1" SelectionChanged="AutoLockChanged">
+                            <ComboBoxItem Content="1 分钟" Tag="1" />
+                            <ComboBoxItem Content="5 分钟" Tag="5" />
+                            <ComboBoxItem Content="10 分钟" Tag="10" />
+                            <ComboBoxItem Content="30 分钟" Tag="30" />
+                            <ComboBoxItem Content="1 小时" Tag="60" />
+                            <ComboBoxItem Content="从不" Tag="0" />
+                        </ComboBox>
+                        <TextBlock Grid.Row="2" Text="复制后多久清除剪贴板" VerticalAlignment="Center" />
+                        <ComboBox x:Name="ClipboardBox" Grid.Row="2" Grid.Column="1" SelectionChanged="ClipboardChanged">
+                            <ComboBoxItem Content="15 秒" Tag="15" />
+                            <ComboBoxItem Content="30 秒" Tag="30" />
+                            <ComboBoxItem Content="1 分钟" Tag="60" />
+                            <ComboBoxItem Content="2 分钟" Tag="120" />
+                            <ComboBoxItem Content="不清除" Tag="0" />
+                        </ComboBox>
+                    </Grid>
+                    <TextBlock Style="{StaticResource Note}" Margin="0,10,0,0"
+                               Text="复制的 Key 不会进入 Windows 剪贴板历史（Win+V）和云剪贴板。Windows 锁屏时密钥匣也会一起锁上。" />
+
+                    <CheckBox x:Name="QuickUnlockCheck" Content="在这台电脑上免密解锁" Margin="0,16,0,0"
+                              Checked="QuickUnlockChanged" Unchecked="QuickUnlockChanged" />
+                    <TextBlock Style="{StaticResource Note}" Margin="28,4,0,0"
+                               Text="用 Windows 账户（DPAPI）保护一份解密钥匙，打开密钥匣时不用再输主密码。方便，但任何以你的 Windows 账户运行的程序也能借此解开密钥匣。" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="修改主密码" Style="{StaticResource Heading}" />
+                    <TextBlock Text="当前主密码" Style="{StaticResource Note}" Margin="0,0,0,4" />
+                    <PasswordBox x:Name="CurrentBox" />
+                    <TextBlock Text="新主密码（至少 8 位）" Style="{StaticResource Note}" Margin="0,10,0,4" />
+                    <PasswordBox x:Name="NewBox" />
+                    <TextBlock Text="再输入一次" Style="{StaticResource Note}" Margin="0,10,0,4" />
+                    <PasswordBox x:Name="RepeatBox" />
+                    <StackPanel Orientation="Horizontal" Margin="0,14,0,0">
+                        <Button x:Name="ChangeButton" Content="修改主密码" Click="ChangePasswordClick" Padding="16,6" />
+                        <TextBlock x:Name="ChangeStatus" VerticalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="数据" Style="{StaticResource Heading}" />
+                    <TextBox x:Name="DataPathText" IsReadOnly="True" BorderThickness="0" Background="Transparent" Padding="0"
+                             FontFamily="{StaticResource MonoFont}" TextWrapping="Wrap" />
+                    <TextBlock Style="{StaticResource Note}" Margin="0,8,0,10"
+                               Text="vault.json 是加密后的密钥库，没有主密码谁也读不了；vault.json.bak 是上一次保存前的版本。备份时复制整个文件夹即可。" />
+                    <Button Content="打开数据文件夹" Click="OpenFolderClick" HorizontalAlignment="Left" Padding="16,6" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="关于" Style="{StaticResource Heading}" />
+                    <TextBlock x:Name="AboutText" Style="{StaticResource Note}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

@@ -1,0 +1,63 @@
+name: mac
+
+on:
+  push:
+    branches: [main]
+    paths: ["mac/**", "tests/fixtures/**", ".github/workflows/mac.yml"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: mac
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+
+      - name: Temporary keychain for the keychain tests
+        run: |
+          security create-keychain -p ci keybox-ci.keychain
+          security set-keychain-settings keybox-ci.keychain
+          security unlock-keychain -p ci keybox-ci.keychain
+          security list-keychains -d user -s keybox-ci.keychain $(security list-keychains -d user | tr -d '"')
+          security default-keychain -s keybox-ci.keychain
+
+      - name: Unit tests
+        env:
+          KEYBOX_KEYCHAIN_TESTS: "1"
+          KEYBOX_FIXTURE_OUT: ${{ runner.temp }}/fixtures
+        run: swift test
+
+      - name: Build debug app
+        run: scripts/build-app.sh debug
+
+      - name: UI snapshot run
+        run: scripts/ui-snapshot.sh ../shots
+
+      - name: Build release app
+        run: scripts/build-app.sh release
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: KeyBox-mac
+          path: mac/dist/KeyBox-mac.zip
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screenshots
+          path: shots
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mac-fixtures
+          path: ${{ runner.temp }}/fixtures
