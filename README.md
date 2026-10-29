@@ -96,3 +96,7 @@ tests\KeyBox.UiSmoke\bin\Debug\net10.0-windows\KeyBox.UiSmoke.exe dist\KeyBox.ex
 | `src/KeyBox/Core/DeviceUnlock.cs` | DPAPI 免密解锁 |
 | `src/KeyBox/Core/EnvScanner.cs` | 从用户环境变量导入 |
 | `src/KeyBox/MainWindow.xaml` | 解锁页、列表、详情、编辑 |
+
+## 许可证
+
+[MIT](LICENSE)
