@@ -143,8 +143,8 @@ private final class Runner {
         model.importSelected(found.filter { !$0.alreadyStored })
         check("imported", model.entries.count == 3)
 
-        if #available(macOS 14, *) {
-            NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        if let open = model.openSettings {
+            open()
         } else {
             NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }

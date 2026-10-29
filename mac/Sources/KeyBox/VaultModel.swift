@@ -71,6 +71,8 @@ final class VaultModel: ObservableObject {
 
     var quickUnlockReady: Bool { settings.quickUnlock && !isCreating }
     var autoQuickUnlockTried = false
+    /// SwiftUI's openSettings action, set by the root view on macOS 14+.
+    var openSettings: (() -> Void)?
 
     lazy var biometryName: String = {
         let ctx = LAContext()

@@ -18,7 +18,8 @@ struct ImportSheet: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("从环境变量导入").font(.title2).fontWeight(.semibold)
-            Text("下面是 ~/.zshrc、~/.zprofile 等 shell 配置文件和当前环境里看起来像 Key 的变量（变量名里有 KEY、TOKEN、SECRET 等）。勾选要收进密钥匣的；那些文件本身不会被改动。")
+            // verbatim: a literal with two ~ would be read as Markdown strikethrough
+            Text(verbatim: "下面是 ~/.zshrc、~/.zprofile 等 shell 配置文件和当前环境里看起来像 Key 的变量（变量名里有 KEY、TOKEN、SECRET 等）。勾选要收进密钥匣的；那些文件本身不会被改动。")
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 

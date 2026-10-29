@@ -17,6 +17,38 @@ struct RootView: View {
             }
         }
         .animation(.easeOut(duration: 0.2), value: model.toast)
+        .background {
+            if #available(macOS 14, *) { SettingsOpener() }
+        }
+    }
+}
+
+/// Hands SwiftUI's openSettings action to the model (the snapshot run uses it; on macOS 14+ the old
+/// showSettingsWindow: selector no longer opens the Settings scene).
+@available(macOS 14, *)
+private struct SettingsOpener: View {
+    @EnvironmentObject var model: VaultModel
+    @Environment(\.openSettings) private var openSettings
+
+    var body: some View {
+        Color.clear.onAppear { model.openSettings = { openSettings() } }
+    }
+}
+
+/// Toolbar button for Settings (also in the app menu as 设置… ⌘,).
+struct SettingsButton: View {
+    var body: some View {
+        if #available(macOS 14, *) {
+            SettingsLink { Label("设置", systemImage: "gearshape") }
+                .help("设置（⌘,）")
+        } else {
+            Button {
+                NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+            } label: {
+                Label("设置", systemImage: "gearshape")
+            }
+            .help("设置（⌘,）")
+        }
     }
 }
 
@@ -142,6 +174,7 @@ struct MainView: View {
                 Button { model.openImport() } label: { Label("从环境变量导入", systemImage: "square.and.arrow.down") }
                     .help("把 ~/.zshrc 等文件里已有的 Key 收进来（⇧⌘I）")
                     .disabled(model.draft != nil)
+                SettingsButton()
                 Button { model.lock() } label: { Label("锁定", systemImage: "lock") }
                     .help("立即锁定（⌘L）")
             }
